@@ -18,10 +18,10 @@ namespace Repositories
             {
                 var connectionStirng = configuration.GetSection(ConnectionStringOption.Key).Get<ConnectionStringOption>();
                 options.UseSqlServer(connectionStirng!.SqlServer, sqlServerOptionsAction =>
-                {
+                {  
                     sqlServerOptionsAction.MigrationsAssembly(typeof(RepositoryAssembly).Assembly.FullName);
                 });
-
+                    
             });
 
             return services;
