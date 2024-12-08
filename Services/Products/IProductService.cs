@@ -9,6 +9,6 @@ namespace Services.Products
 {
     public interface IProductService
     {
-        public Task<ServiceResult<List<Product>>> GetTopPriceProductAsync(int count);
+        public Task<ServiceResult<List<ProductDto>>> GetTopPriceProductAsync(int count);
     }   
 }

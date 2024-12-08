@@ -54,4 +54,51 @@ namespace Services
 
 
     }
+    public class ServiceResult
+    {
+        
+        public List<string>? ErrorMassage { get; set; }
+        public bool IsSuccess => ErrorMassage == null || ErrorMassage.Count() == 0;
+
+        public bool IsFail => !IsSuccess;
+
+        public HttpStatusCode status { get; set; }
+
+
+        public static ServiceResult Succses(HttpStatusCode Status = HttpStatusCode.OK)
+        {
+            return new ServiceResult()
+            {
+                
+                status = Status
+            };
+
+        }
+
+        public static ServiceResult Fail(List<string> errormassage, HttpStatusCode Status = HttpStatusCode.BadRequest)
+        {
+            return new ServiceResult()
+            {
+                ErrorMassage = errormassage,
+                status = Status
+            };
+
+        }
+
+        public static ServiceResult Fail(string errormassage, HttpStatusCode Status = HttpStatusCode.BadRequest)
+        {
+            return new ServiceResult()
+            {
+                ErrorMassage = [errormassage],
+                status = Status
+            };
+
+        }
+
+
+
+
+
+    }
+
 }

@@ -10,26 +10,66 @@ using System.Threading.Tasks;
 
 namespace Services.Products
 {
-    public class ProductService(IProductRepository productRepository) : IProductService
+    public class ProductService(IProductRepository productRepository,IUnitOfWork unitofwork) : IProductService
     {
-        public async Task<ServiceResult<List<Product>>> GetTopPriceProductAsync(int count)
+        public async Task<ServiceResult<List<ProductDto>>> GetTopPriceProductAsync(int count)
         {
             var products = await productRepository.GetTopPrizeProductAsync(count);
-            return new ServiceResult<List<Product>>()
+
+            var productAsDto=products.Select(p=>new ProductDto(p.Id,p.Name,p.Price,p.Stock)).ToList();
+            return new ServiceResult<List<ProductDto>>()
             {
-                Data = products
+                Data = productAsDto
             };
         }
 
-        public async Task<ServiceResult<Product>> GetProductByIdAsync(int id)
+        public async Task<ServiceResult<ProductDto>> GetProductByIdAsync(int id)
         {
             var product = await productRepository.GetByIdAsync(id);
 
             if (product is null)
             {
-                ServiceResult<Product>.Fail("Product not found", HttpStatusCode.NotFound);
+                ServiceResult<ProductDto>.Fail("Product not found", HttpStatusCode.NotFound);
             }
-            return ServiceResult<Product>.Succses(product);
+            var productAsDto = new ProductDto(product.Id, product.Name, product.Price, product.Stock);
+
+            return ServiceResult<ProductDto>.Succses(productAsDto);
+        }
+
+        public async Task<ServiceResult<CreateProductResponse>> CreateProductAsync(CreateProductRequest request)
+        {
+            var product = new Product()
+            {
+                Name = request.Name,
+                Price = request.Price,
+                Stock = request.stock,
+
+
+            };
+
+            await productRepository.Add(product);
+            await unitofwork.SaveChangesAsync();
+            return ServiceResult<CreateProductResponse>.Succses(new CreateProductResponse(product.Id));
+
+        }
+
+        public async Task<ServiceResult> UpdateProductAync(int id,UpdateProductRequest request)
+        {
+            var product=await productRepository.GetByIdAsync(id);
+            if(product is null)
+            {
+                return ServiceResult.Fail("not found", HttpStatusCode.NotFound);
+            }
+
+            product.Name = request.name;
+            product.Price = request.price;
+            product.Stock = request.stock;
+
+            await productRepository.Add(product);
+            await unitofwork.SaveChangesAsync();
+
+            return ServiceResult.Succses();
+
         }
     }
 }
