@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Repositories.Products;
 using Repositories.Products.Products;
@@ -78,7 +79,7 @@ namespace Services.Products
             await productRepository.Add(product);
             await unitofwork.SaveChangesAsync();
 
-            return ServiceResult.Succses();
+            return ServiceResult.Succses(HttpStatusCode.NoContent);
 
         }
 
@@ -93,7 +94,7 @@ namespace Services.Products
 
             productRepository.Delete(product);
             await unitofwork.SaveChangesAsync();
-            return ServiceResult.Succses();
+            return ServiceResult.Succses(HttpStatusCode.NoContent);
 
         }
     }
