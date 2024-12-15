@@ -27,7 +27,7 @@ namespace Services.Products
 
         public async Task<ServiceResult<ProductDto?>> GetProductByIdAsync(int id)
         {
-            var product = await productRepository.GetByIdAsync(id);
+            var product = await productRepository.GetByIdAsync(id); 
 
             if (product is null)
             {
