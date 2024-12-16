@@ -12,22 +12,23 @@ namespace App.API.Controllers
         [NonAction]
         public IActionResult CreateActionResult<T>(ServiceResult<T> result)
         {
-            if (result.status == HttpStatusCode.NoContent)
+            return result.status switch
             {
-                return new ObjectResult(null) { StatusCode = result.status.GetHashCode() };
-            }
-            return new ObjectResult(result) { StatusCode=result.status.GetHashCode() };
+                HttpStatusCode.NoContent => NoContent(),
+                HttpStatusCode.Created => Created(result.url, result.Data),
+                _ => new ObjectResult(result) { StatusCode = result.status.GetHashCode() }
+            };
         }
 
         [NonAction]
 
         public IActionResult CreateActionResult(ServiceResult result)
         {
-            if (result.status == HttpStatusCode.NoContent)
+            return result.status switch
             {
-                return new ObjectResult(null) { StatusCode = result.status.GetHashCode() };
-            }
-            return new ObjectResult(result) { StatusCode = result.status.GetHashCode() };
+                HttpStatusCode.NoContent => new ObjectResult(null) { StatusCode = result.status.GetHashCode() },
+                _ => new ObjectResult(result) { StatusCode = result.status.GetHashCode() }
+            };
         }
     }
 }

@@ -25,6 +25,9 @@ namespace Services
         [JsonIgnore]
 
         public HttpStatusCode status { get; set; }
+        [JsonIgnore]
+
+        public string? url{ get; set; }
 
 
         public static ServiceResult<T> Succses(T? data,HttpStatusCode Status=HttpStatusCode.OK) {
@@ -32,6 +35,15 @@ namespace Services
             {
                 Data = data,
                 status = Status
+            };
+
+        }
+        public static ServiceResult<T> SuccsesAsCreated(T? data,string url)
+        {
+            return new ServiceResult<T>()
+            {
+                Data = data,
+                url = url
             };
 
         }

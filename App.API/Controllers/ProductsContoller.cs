@@ -12,6 +12,12 @@ namespace App.API.Controllers
             var serviceResult = await productService.GetAllList();
             return CreateActionResult(serviceResult);
         }
+        [HttpGet("{pagedNumber}/{pagedSize}")]
+        public async Task<IActionResult> GetPagedAll(int pageNumber,int pagedSize)
+        {
+            var serviceResult = await productService.GetPagedList(pageNumber, pagedSize);
+            return CreateActionResult(serviceResult);
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)

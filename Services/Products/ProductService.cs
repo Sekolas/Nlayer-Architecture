@@ -25,6 +25,17 @@ namespace Services.Products
             };
         }
 
+        public async Task<ServiceResult<List<ProductDto>>> GetPagedList(int pageNumber,int pagedSize)
+        {
+
+            var products = await productRepository.GetAll().Skip((pageNumber - 1) * pagedSize).Take(pagedSize).ToListAsync();
+
+            var productAsDto= products.Select(p=>new ProductDto(p.Id,p.Name,p.Price,p.Stock)).ToList();
+
+
+            return ServiceResult<List<ProductDto>>.Succses(productAsDto);
+        }
+
         public async Task<ServiceResult<ProductDto?>> GetProductByIdAsync(int id)
         {
             var product = await productRepository.GetByIdAsync(id); 
@@ -60,7 +71,8 @@ namespace Services.Products
 
             await productRepository.Add(product);
             await unitofwork.SaveChangesAsync();
-            return ServiceResult<CreateProductResponse>.Succses(new CreateProductResponse(product.Id));
+            return ServiceResult<CreateProductResponse>.SuccsesAsCreated(new CreateProductResponse(product.Id),
+                $"api/products{product.Id}");
 
         }
 

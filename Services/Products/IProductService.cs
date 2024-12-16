@@ -14,6 +14,7 @@ namespace Services.Products
 
         public  Task<ServiceResult<List<ProductDto>>> GetAllList();
 
+        public  Task<ServiceResult<List<ProductDto>>> GetPagedList(int pageNumber, int pagedSize);
         public Task<ServiceResult<CreateProductResponse>> CreateProductAsync(CreateProductRequest request);
 
         public  Task<ServiceResult> UpdateProductAync(int id, UpdateProductRequest request);
