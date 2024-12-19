@@ -12,14 +12,14 @@ namespace App.API.Controllers
             var serviceResult = await productService.GetAllList();
             return CreateActionResult(serviceResult);
         }
-        [HttpGet("{pagedNumber}/{pagedSize}")]
+        [HttpGet("{pagedNumber:int}/{pagedSize:int}")]
         public async Task<IActionResult> GetPagedAll(int pageNumber,int pagedSize)
         {
             var serviceResult = await productService.GetPagedList(pageNumber, pagedSize);
             return CreateActionResult(serviceResult);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
             var serviceResult = await productService.GetProductByIdAsync(id);
@@ -31,12 +31,21 @@ namespace App.API.Controllers
             var serviceResult = await productService.CreateProductAsync(request);
             return CreateActionResult(serviceResult);
         }
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id,UpdateProductRequest request)
         {
             var serviceResult = await productService.UpdateProductAync(id,request);
             return CreateActionResult(serviceResult);
         }
+        [HttpPatch("stock")]
+        public async Task<IActionResult> UpdateStock(UpdateStockProductStockRequest request)
+        {
+            var serviceResult = await productService.UpdateStockAsyn(request);
+            return CreateActionResult(serviceResult);
+        }
+
+
+
         [HttpDelete]
 
         public async Task<IActionResult> Delete(int id)

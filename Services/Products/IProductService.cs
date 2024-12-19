@@ -14,6 +14,8 @@ namespace Services.Products
 
         public  Task<ServiceResult<List<ProductDto>>> GetAllList();
 
+        public  Task<ServiceResult> UpdateStockAsyn(UpdateStockProductStockRequest request);
+
         public  Task<ServiceResult<List<ProductDto>>> GetPagedList(int pageNumber, int pagedSize);
         public Task<ServiceResult<CreateProductResponse>> CreateProductAsync(CreateProductRequest request);
 

@@ -43,6 +43,7 @@ namespace Services
             return new ServiceResult<T>()
             {
                 Data = data,
+                status = HttpStatusCode.Created,
                 url = url
             };
 
