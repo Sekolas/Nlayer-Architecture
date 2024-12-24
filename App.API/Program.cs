@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Extensions;
 using Services.Extensions;
@@ -11,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddRepositories(builder.Configuration).AddServices(builder.Configuration);
-
+builder.Services.Configure<ApiBehaviorOptions>(options=>options.SuppressModelStateInvalidFilter=true);
 
 
 var app = builder.Build();
