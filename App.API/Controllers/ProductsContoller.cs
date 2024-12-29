@@ -46,7 +46,7 @@ namespace App.API.Controllers
 
 
 
-        [HttpDelete]
+        [HttpDelete("{id:int}")]
 
         public async Task<IActionResult> Delete(int id)
         {
