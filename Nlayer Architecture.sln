@@ -3,14 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{4F3D4ECA-98C8-46D4-8E54-0EFC4B58382F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{4F3D4ECA-98C8-46D4-8E54-0EFC4B58382F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{FA777A72-54AB-470F-831E-CFCD3C7066CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{FA777A72-54AB-470F-831E-CFCD3C7066CD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4F3D4ECA-98C8-46D4-8E54-0EFC4B58382F} = {4F3D4ECA-98C8-46D4-8E54-0EFC4B58382F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.API", "App.API\App.API.csproj", "{59AD3712-77CB-49D1-98CB-374E20A566A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.API", "App.API\App.API.csproj", "{59AD3712-77CB-49D1-98CB-374E20A566A1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FA777A72-54AB-470F-831E-CFCD3C7066CD} = {FA777A72-54AB-470F-831E-CFCD3C7066CD}
 	EndProjectSection
