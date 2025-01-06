@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Repositories.Products;
@@ -60,6 +61,14 @@ namespace Services.Products
 
         public async Task<ServiceResult<CreateProductResponse>> CreateProductAsync(CreateProductRequest request)
         {
+            var anyProduct = await productRepository.Where(x=>x.Name == request.Name).AnyAsync();
+
+            if(anyProduct)
+            {
+                return ServiceResult<CreateProductResponse>.Fail("Product already exists", HttpStatusCode.BadRequest);
+
+            }
+
             var product = new Product()
             {
                 Name = request.Name,
