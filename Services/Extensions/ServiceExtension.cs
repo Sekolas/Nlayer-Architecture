@@ -21,6 +21,7 @@ namespace Services.Extensions
             services.AddScoped<IProductService, ProductService>();
             services.AddFluentValidation();
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }
     }

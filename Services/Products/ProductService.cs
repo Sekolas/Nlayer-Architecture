@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using AutoMapper;
+using AutoMapper.Internal.Mappers;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Repositories.Products;
 using Repositories.Products.Products;
+using Services.Create;
+using Services.Update;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +22,9 @@ namespace Services.Products
         public async Task<ServiceResult<List<ProductDto>>> GetTopPriceProductAsync(int count)
         {
             var products = await productRepository.GetTopPrizeProductAsync(count);
-
             var productAsDto=products.Select(p=>new ProductDto(p.Id,p.Name,p.Price,p.Stock)).ToList();
+
+            
             return new ServiceResult<List<ProductDto>>()
             {
                 Data = productAsDto
@@ -33,6 +38,7 @@ namespace Services.Products
 
             var productAsDto= products.Select(p=>new ProductDto(p.Id,p.Name,p.Price,p.Stock)).ToList();
 
+            
 
             return ServiceResult<List<ProductDto>>.Succses(productAsDto);
         }

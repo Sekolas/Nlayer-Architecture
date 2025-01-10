@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Products
+namespace Services.Update
 {
-    public record  UpdateProductRequest(string name,int price,int stock);
-    
+    public record UpdateProductRequest(string name, int price, int stock);
+
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Services.Create;
 using Services.Products;
+using Services.Update;
 
 namespace App.API.Controllers
 {
