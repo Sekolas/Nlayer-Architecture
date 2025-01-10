@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Create
+namespace Services.Products.Create
 {
-    public record CreateProductResponse(int id);
+    public record CreateProductRequest(string Name, decimal Price, int stock);
+
 
 }

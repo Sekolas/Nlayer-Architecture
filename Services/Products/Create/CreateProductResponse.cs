@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Update
+namespace Services.Products.Create
 {
-    public record UpdateStockProductStockRequest(int productId, int qunatity);
-
+    public record CreateProductResponse(int id);
 
 }

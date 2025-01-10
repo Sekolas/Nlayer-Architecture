@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Create
+namespace Services.Products.Create
 {
 
     public class CreateProductsRewuestVlaidatör : AbstractValidator<CreateProductRequest>
