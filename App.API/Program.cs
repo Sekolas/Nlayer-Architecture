@@ -21,8 +21,9 @@ builder.Services.AddRepositories(builder.Configuration).AddServices(builder.Conf
 builder.Services.Configure<ApiBehaviorOptions>(options=>options.SuppressModelStateInvalidFilter=true);
 
 
-var app = builder.Build();
 
+var app = builder.Build();
+app.UseExceptionHandler(x => { });
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

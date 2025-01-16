@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Services.Products
 {
-    public class ProductService(IProductRepository productRepository,IUnitOfWork unitofworki,IMapper mapper) : IProductService
+    public class ProductService(IProductRepository productRepository,IUnitOfWork unitofwork,IMapper mapper) : IProductService
     {
         public async Task<ServiceResult<List<ProductDto>>> GetTopPriceProductAsync(int count)
         {
@@ -50,7 +50,7 @@ namespace Services.Products
 
             if (product is null)
             {
-                ServiceResult<ProductDto>.Fail("Product not found", HttpStatusCode.NotFound);
+                return ServiceResult<ProductDto>.Fail("Product not found", HttpStatusCode.NotFound);
             }
             //var productAsDto = new ProductDto(product.Id, product.Name, product.Price, product.Stock);
             var productAsDto = mapper.Map<ProductDto>(product);
